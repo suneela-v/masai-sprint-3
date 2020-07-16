@@ -1,0 +1,36 @@
+<!--
+    navbar (alljobs)
+    input boxes 3 
+    and one search button
+    display page
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+</head>
+<body> 
+  
+ 
+   
+     <p id="p1"></p> 
+    <!-- <h1 id="p2">QWERT</h1> -->
+   
+ <script>
+    window.onload = function(){
+    var user = JSON.parse(localStorage.getItem("alltickets"))
+    console.log(user[0].title)
+    var p1 =document.getElementById("p1")
+    var p2 =document.getElementById("p2")
+    var asd = user[0].description
+    p1.innerHTML = asd
+    // p1.textContent = asd.innerHTML
+    }
+</script>

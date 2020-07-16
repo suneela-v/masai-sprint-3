@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+
+<style>
+    /* #page
+     {
+    visibility:hidden;
+   
+}    */
+</style>
+</head>
+
+<body>
+    <nav class="navbar fixed-top navbar-light bg-dark">
+        <a class="navbar-brand text-white">DreamJobs</a>
+        <div class="form-inline">
+          <a href="page2.html"class="text-white">Alljobs |</a>
+          <a href="#"class="text-white">Postjobs |</a>
+          
+        </div>
+    </nav>  
+    <div style="height:80px" ></div>
+    <form id="form">
+        <div class="form-row align-items-center">
+          <div class="col-3">
+            <label class="inlineFormInput" for="inlineFormInput">Job description</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Filter by company,title" name="com">
+          </div>
+          <div class="col-3">
+            <label class="inlineFormInputGroup" for="inlineFormInputGroup">location</label>
+           
+              <input type="text" name="loc" class="form-control" id="inlineFormInputGroup" placeholder="Filter by city,zipcode">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+              <label class="form-check-label" for="autoSizingCheck">
+                FullTimeOnly
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+          </div>
+        </div>
+      </form>
+ 
+      <p > 
+        <a id="b1" class="btn btn-primary"  data-toggle="collapse" href="projectsupport.html" role="button" aria-expanded="false" aria-controls="collapseExample">
+          
+        </a>
+        </p>
+        <!-- <p> 
+            <a id="b2" class="btn btn-primary"  data-toggle="collapse" href="projectsupport.html" role="button" aria-expanded="false" aria-controls="collapseExample">
+              qweerrtrttyy
+            </a>
+            </p>
+            <p> 
+                <a id="b3" class="btn btn-primary"  data-toggle="collapse" href="projectsupport.html" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  qweerrtrttyy
+                </a>
+                </p> -->
+
+        <div id="d1"></div>
+
+<script>
+      
+        window.onload = function()
+{  
+   
+    var btn =document.querySelector("button")
+    btn.addEventListener("click",displayingdata)
+      
+}  
+   
+         function displayingdata(){
+    event.preventDefault()
+    // var os =document.getElementById("os")
+    // var select =os.value;
+    var form = document.getElementById("form")
+    var form1 = new FormData(form)
+   var des = form1.get("com")
+   var area = form1.get("loc")
+   var xhr =new XMLHttpRequest();
+   //xhr.open("GET","http://localhost:8080/codenames/"+select)
+   xhr.open("GET","https://jobs.github.com/positions.json?description="+des)
+   //xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+   //xhr.setRequestHeader("content-Type")
+   xhr.send()
+   xhr.onload = function(){
+       var response = JSON.parse(this.response)
+       console.log(response)
+      // console.log(response.codenames[0].version)
+       if(this.status===200){
+           //console.log("response")
+          //andleResponse()
+          renderDom(response)
+       }
+       }
+      xhr.onerror = function(){
+          console.log(this.response)
+      // var data = JSON.parse(this.response)
+       //renderDom(data)
+   }
+}
+function renderDom(data){
+localStorage.setItem("alltickets", JSON.stringify(data))
+
+var d1 = document.getElementById("d1")
+//   var d2 = document.createElement("div")
+//  
+     
+     var p1 = document.getElementById("b1")
+      for(var i=0;i<4;i++){
+     p1.innerHTML +="<li>"+data[i].title+"</li>"+"<hr/>"
+
+}
+    
+//   var p2 = document.getElementById("b2")
+//      // for(var i=0;i<4;i++){tent = "asd"
+//      p2.textContent =data[0].location
+//     // d2.textContent="erwwrwr"
+//    d2.append(p1,p2)
+// // }   
+ d1.append(p1)
+}
+            
+
+
+</script>
+
+</body>
+
+</html>
